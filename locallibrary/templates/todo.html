@@ -111,17 +111,14 @@
 
                         <input type="text" name="content" placeholder="Add item name here" required>
 
-                        <label class="container">
-                        <input type="checkbox" >Urgent
-                        <span class="checkmark"></span>
-                        </label>
 
-                        <label class="container">
-                         <input type="checkbox">Important
-                         <span class="checkmark"></span>
-                         </label>
+                        <input type="checkbox" name="checkbox1" value="Urgent">Urgent
 
-                        <input type="text" id="due_date" placeholder="Enter the due date" name="due date" required>
+
+                         <input type="checkbox" name="checkbox2" value="Important">Important
+
+
+                        <input type="text" id="due_date" placeholder="Enter the due date" name="due date">
                         <button type="submit" class="btn">Add</button>
                         <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
                      </form>
