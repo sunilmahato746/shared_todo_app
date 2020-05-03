@@ -11,8 +11,8 @@ def addTodo(request):
     if request.method == 'POST':
         # import pdb;pdb.set_trace()
         data = request.POST.get('content')
-        important =True if 'Important' in request.POST.get('checkbox2') else False
-        urgent = True if 'Urgent' in request.POST.get('checkbox1') else False
+        important =True if 'Important' in request.POST.get('checkbox2',' ') else False
+        urgent = True if 'Urgent' in request.POST.get('checkbox1',' ') else False
         Datelogged = datetime.date.today()
         if data not in ['',None]:
             new_item=TodoItem(content=data,Urgent=urgent,Important=important,Datelogged=Datelogged)
