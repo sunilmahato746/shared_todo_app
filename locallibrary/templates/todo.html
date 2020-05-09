@@ -83,6 +83,43 @@
       .form-container .btn:hover, .open-button:hover {
       opacity: 1;
       }
+
+             .wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(200px, auto);
+}
+.one {
+  grid-column: 1 ;
+  grid-row: 1;
+  background-color:DeepPink
+}
+.two {
+  grid-column: 2;
+  grid-row: 1 ;
+  background-color:LightSlateGray
+}
+.three {
+  grid-column: 1;
+  grid-row: 2 ;
+  background-color:LightSalmon
+}
+.four {
+  grid-column: 2;
+  grid-row: 2;
+  background-color:LightSeaGreen
+}
+ input[id=cb] {
+  display: none;
+}
+
+input[type=checkbox]:checked + label {
+   text-decoration: line-through;
+}
+
+
+
     </style>
 
 
@@ -90,19 +127,16 @@
 <body>
 <h1>Welcome to Sunil's todo APP</h1>
 <h2>Add your to-do items</h2>
-<ul>
-    {% for items in all_items %}
-      <li>{{items.content}}
-          <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-             <input type="submit" value="Delete">
-          </form>
-      </li>
-    {% endfor %}
-</ul>
+
 
     <div class="open-btn">
       <button class="open-button" onclick="openForm()"><strong>Add New Item</strong></button>
     </div>
+    <br>
+    <br>
+    <br>
+
+
 
            <div class="login-popup">
                 <div class="form-popup" id="popupForm">
@@ -126,7 +160,62 @@
            </div>
 
 
+           <div class="wrapper">
+               <div class="one"><b>Urgent and Important</b>
+               <ul style="list-style-type:none">
+                {% for items in all_items %}
+                   {% if items.Urgent and items.Important %}
+                    <li><input type="checkbox"> <label>
+                        {{items.content}}</label>
+                        <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                        <input type="submit" value="Delete">
+                        </form>
+                     </li>
+                   {% endif %}
+                {% endfor %}
+                </ul>
+               </div>
+               <div class="two"><b>Not Urgent and Important</b>
+               <ul style="list-style-type:none">
+                {% for items in all_items %}
+                   {% if not items.Urgent and items.Important %}
 
+                   <li><input type="checkbox"><label>{{items.content}}</label>
+                        <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                        <input type="submit" value="Delete">
+                        </form>
+                     </li>
+                   {% endif %}
+                {% endfor %}
+                </ul>
+               </div>
+               <div class ="three"><b>Urgent, Not Important</b>
+               <ul style="list-style-type:none">
+                {% for items in all_items %}
+                   {% if items.Urgent and not items.Important %}
+                    <li><input type="checkbox"><label>{{items.content}}</label>
+                        <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                        <input type="submit" value="Delete">
+                        </form>
+                     </li>
+                   {% endif %}
+                {% endfor %}
+                </ul>
+               </div>
+               <div class="four"><b>Not Urgent,Not Important</b>
+               <ul style="list-style-type:none">
+                {% for items in all_items %}
+                   {% if not items.Urgent and not items.Important %}
+                   <li><input type="checkbox"><label>{{items.content}}</label>
+                        <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                        <input type="submit" value="Delete">
+                        </form>
+                     </li>
+                   {% endif %}
+                {% endfor %}
+                </ul>
+               </div>
+           </div>
 
   <script>
       function openForm() {
