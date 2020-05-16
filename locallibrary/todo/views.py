@@ -9,13 +9,19 @@ def todoView(request):
 
 def addTodo(request):
     if request.method == 'POST':
-        # import pdb;pdb.set_trace()
+        import pdb;pdb.set_trace()
         data = request.POST.get('content')
         important =True if 'Important' in request.POST.get('checkbox2',' ') else False
         urgent = True if 'Urgent' in request.POST.get('checkbox1',' ') else False
         Datelogged = datetime.date.today()
+        strdate= request.POST.get('duedate',None)
+        if strdate:
+            Targetdate=datetime.datetime.strptime(strdate,'%d-%m-%y')
+        else:
+            Targetdate=Datelogged
         if data not in ['',None]:
-            new_item=TodoItem(content=data,Urgent=urgent,Important=important,Datelogged=Datelogged)
+            new_item=TodoItem(content=data,Urgent=urgent,Important=important,\
+                              Datelogged=Datelogged,Targetdate=Targetdate)
             new_item.save()
         return HttpResponseRedirect('/todo/')
 
