@@ -9,7 +9,6 @@ def todoView(request):
 
 def addTodo(request):
     if request.method == 'POST':
-        import pdb;pdb.set_trace()
         data = request.POST.get('content')
         important =True if 'Important' in request.POST.get('checkbox2',' ') else False
         urgent = True if 'Urgent' in request.POST.get('checkbox1',' ') else False
@@ -32,7 +31,7 @@ def deleteTodo(request, todo_id):
 
 def strikethroughTodo(request, todo_id):
     item_to_strike=TodoItem.objects.get(id=todo_id)
-    item_to_strike.Flag=True
+    item_to_strike.Flag= not item_to_strike.Flag
     item_to_strike.save()
     return HttpResponseRedirect('/todo/')
 

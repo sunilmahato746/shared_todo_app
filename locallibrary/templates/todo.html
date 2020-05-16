@@ -111,8 +111,7 @@
   background-color:LightSeaGreen
 }
 
-
-input[type=checkbox]:checked + label {
+.checked {
    text-decoration: line-through;
 }
 
@@ -168,7 +167,7 @@ input[type=checkbox]:checked + label {
                    <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
                    <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
                        {% if items.Flag %}
-                       <label>{{items.content}}</label>
+                       <label><del>{{items.content}}</del></label>
                        {% else %}
                        <label>{{items.content}}</label>
                        {% endif %}
@@ -186,12 +185,20 @@ input[type=checkbox]:checked + label {
                <ul style="list-style-type:none">
                 {% for items in all_items %}
                    {% if not items.Urgent and items.Important %}
+                   <li>
+                       <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
+                           {% if items.Flag %}
+                           <label><del>{{items.content}}</del></label>
+                           {% else %}
+                           <label>{{items.content}}</label>
+                           {% endif %}
 
-                   <li><input type="checkbox" class="mycheckbox"><label>{{items.content}}</label>
-                        <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-                        <input type="submit" value="Delete">
-                        </form>
-                     </li>
+                       </form>
+                       <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                           <input type="submit" value="Delete" >
+                       </form>
+                   </li>
                    {% endif %}
                 {% endfor %}
                 </ul>
@@ -200,11 +207,20 @@ input[type=checkbox]:checked + label {
                <ul style="list-style-type:none">
                 {% for items in all_items %}
                    {% if items.Urgent and not items.Important %}
-                    <li><input type="checkbox" class="mycheckbox"><label>{{items.content}}</label>
-                        <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-                        <input type="submit" value="Delete">
-                        </form>
-                     </li>
+                   <li>
+                       <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
+                           {% if items.Flag %}
+                           <label><del>{{items.content}}</del></label>
+                           {% else %}
+                           <label>{{items.content}}</label>
+                           {% endif %}
+
+                       </form>
+                       <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                           <input type="submit" value="Delete" >
+                       </form>
+                   </li>
                    {% endif %}
                 {% endfor %}
                 </ul>
@@ -213,11 +229,20 @@ input[type=checkbox]:checked + label {
                <ul style="list-style-type:none">
                 {% for items in all_items %}
                    {% if not items.Urgent and not items.Important %}
-                   <li><input type="checkbox" class="mycheckbox"><label>{{items.content}}</label>
-                        <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-                        <input type="submit" value="Delete">
-                        </form>
-                     </li>
+                   <li>
+                       <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
+                           {% if items.Flag %}
+                           <label><del>{{items.content}}</del></label>
+                           {% else %}
+                           <label>{{items.content}}</label>
+                           {% endif %}
+
+                       </form>
+                       <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                           <input type="submit" value="Delete" >
+                       </form>
+                   </li>
                    {% endif %}
                 {% endfor %}
                 </ul>
