@@ -29,3 +29,10 @@ def deleteTodo(request, todo_id):
     item_to_delete=TodoItem.objects.get(id=todo_id)
     item_to_delete.delete()
     return HttpResponseRedirect('/todo/')
+
+def strikethroughTodo(request, todo_id):
+    item_to_strike=TodoItem.objects.get(id=todo_id)
+    item_to_strike.Flag=True
+    item_to_strike.save()
+    return HttpResponseRedirect('/todo/')
+

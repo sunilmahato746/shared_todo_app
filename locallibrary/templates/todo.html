@@ -110,9 +110,7 @@
   grid-row: 2;
   background-color:LightSeaGreen
 }
- input[id=cb] {
-  display: none;
-}
+
 
 input[type=checkbox]:checked + label {
    text-decoration: line-through;
@@ -166,10 +164,18 @@ input[type=checkbox]:checked + label {
                <ul style="list-style-type:none">
                 {% for items in all_items %}
                    {% if items.Urgent and items.Important %}
-                    <li><input type="checkbox"> <label>
-                        {{items.content}}</label>
+                    <li>
+                   <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
+                   <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
+                       {% if items.Flag %}
+                       <label>{{items.content}}</label>
+                       {% else %}
+                       <label>{{items.content}}</label>
+                       {% endif %}
+
+                   </form>
                         <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-                        <input type="submit" value="Delete">
+                        <input type="submit" value="Delete" >
                         </form>
                      </li>
                    {% endif %}
@@ -181,7 +187,7 @@ input[type=checkbox]:checked + label {
                 {% for items in all_items %}
                    {% if not items.Urgent and items.Important %}
 
-                   <li><input type="checkbox"><label>{{items.content}}</label>
+                   <li><input type="checkbox" class="mycheckbox"><label>{{items.content}}</label>
                         <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
                         <input type="submit" value="Delete">
                         </form>
@@ -194,7 +200,7 @@ input[type=checkbox]:checked + label {
                <ul style="list-style-type:none">
                 {% for items in all_items %}
                    {% if items.Urgent and not items.Important %}
-                    <li><input type="checkbox"><label>{{items.content}}</label>
+                    <li><input type="checkbox" class="mycheckbox"><label>{{items.content}}</label>
                         <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
                         <input type="submit" value="Delete">
                         </form>
@@ -207,7 +213,7 @@ input[type=checkbox]:checked + label {
                <ul style="list-style-type:none">
                 {% for items in all_items %}
                    {% if not items.Urgent and not items.Important %}
-                   <li><input type="checkbox"><label>{{items.content}}</label>
+                   <li><input type="checkbox" class="mycheckbox"><label>{{items.content}}</label>
                         <form action="/deleteTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
                         <input type="submit" value="Delete">
                         </form>
@@ -218,7 +224,11 @@ input[type=checkbox]:checked + label {
                </div>
            </div>
 
+     <p id="demo"></p>
+
+
   <script>
+
       function openForm() {
         document.getElementById("popupForm").style.display="block";
       }

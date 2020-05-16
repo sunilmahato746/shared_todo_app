@@ -7,3 +7,4 @@ class TodoItem(models.Model):
     Important = models.BooleanField(null=True)
     Datelogged= models.DateTimeField(null=True)
     Targetdate = models.DateTimeField(null=True)
+    Flag=models.BooleanField(null=False)
