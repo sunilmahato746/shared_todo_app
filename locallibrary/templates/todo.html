@@ -165,10 +165,11 @@
                    {% if items.Urgent and items.Important %}
                     <li>
                    <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-                   <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
                        {% if items.Flag %}
+                       <input type="checkbox" class="mycheckbox" onChange="this.form.submit()" checked>
                        <label><del>{{items.content}}</del></label>
                        {% else %}
+                       <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
                        <label>{{items.content}}</label>
                        {% endif %}
 
@@ -187,10 +188,12 @@
                    {% if not items.Urgent and items.Important %}
                    <li>
                        <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
+
                            {% if items.Flag %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()" checked>
                            <label><del>{{items.content}}</del></label>
                            {% else %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
                            <label>{{items.content}}</label>
                            {% endif %}
 
@@ -209,10 +212,11 @@
                    {% if items.Urgent and not items.Important %}
                    <li>
                        <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
                            {% if items.Flag %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()" checked>
                            <label><del>{{items.content}}</del></label>
                            {% else %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
                            <label>{{items.content}}</label>
                            {% endif %}
 
@@ -231,10 +235,11 @@
                    {% if not items.Urgent and not items.Important %}
                    <li>
                        <form action="/strikeTodo/{{items.id}}/" method="post" style="display:inline;">{% csrf_token %}
-                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
                            {% if items.Flag %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()" checked>
                            <label><del>{{items.content}}</del></label>
                            {% else %}
+                           <input type="checkbox" class="mycheckbox" onChange="this.form.submit()">
                            <label>{{items.content}}</label>
                            {% endif %}
 
