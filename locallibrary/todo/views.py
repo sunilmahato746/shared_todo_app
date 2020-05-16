@@ -21,7 +21,7 @@ def addTodo(request):
             Targetdate=Datelogged
         if data not in ['',None]:
             new_item=TodoItem(content=data,Urgent=urgent,Important=important,\
-                              Datelogged=Datelogged,Targetdate=Targetdate)
+                              Datelogged=Datelogged,Targetdate=Targetdate,Flag=False)
             new_item.save()
         return HttpResponseRedirect('/todo/')
 
